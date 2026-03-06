@@ -35,5 +35,11 @@ namespace LanguageServer.VsCode.Contracts.Client
         /// </remarks>
         [JsonRpcMethod]
         Task<JArray> Configuration(IEnumerable<ConfigurationItem> items);
+
+        /// <summary>
+        /// Fetch the workspace folders configured in the client.
+        /// </summary>
+        [JsonRpcMethod("workspace/workspaceFolders")]
+        Task<IEnumerable<WorkspaceFolder>> WorkspaceFolders();
     }
 }
