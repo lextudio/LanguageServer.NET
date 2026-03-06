@@ -100,10 +100,77 @@ namespace LanguageServer.VsCode.Contracts
     }
 
     [JsonObject(MemberSerialization.OptIn)]
+    public class SemanticTokensRangeParams : ITextDocumentIdentifierParams
+    {
+        [JsonProperty]
+        public TextDocumentIdentifier TextDocument { get; set; }
+
+        [JsonProperty]
+        public Range Range { get; set; }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class SemanticTokensDeltaParams : ITextDocumentIdentifierParams
+    {
+        [JsonProperty]
+        public TextDocumentIdentifier TextDocument { get; set; }
+
+        [JsonProperty]
+        public string PreviousResultId { get; set; }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
     public class SemanticTokens
+    {
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string ResultId { get; set; }
+
+        [JsonProperty]
+        public int[] Data { get; set; } = Array.Empty<int>();
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class SemanticTokensEdit
+    {
+        [JsonProperty]
+        public int Start { get; set; }
+
+        [JsonProperty]
+        public int DeleteCount { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public int[] Data { get; set; }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class SemanticTokensDelta
+    {
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string ResultId { get; set; }
+
+        [JsonProperty]
+        public ICollection<SemanticTokensEdit> Edits { get; set; } = Array.Empty<SemanticTokensEdit>();
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class SemanticTokensPartialResult
     {
         [JsonProperty]
         public int[] Data { get; set; } = Array.Empty<int>();
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class SemanticTokensDeltaPartialResult
+    {
+        [JsonProperty]
+        public ICollection<SemanticTokensEdit> Edits { get; set; } = Array.Empty<SemanticTokensEdit>();
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class SemanticTokensFullOptions
+    {
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public bool Delta { get; set; }
     }
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -250,7 +317,7 @@ namespace LanguageServer.VsCode.Contracts
         public SemanticTokensLegend Legend { get; set; }
 
         [JsonProperty]
-        public bool Full { get; set; }
+        public object Full { get; set; }
 
         [JsonProperty]
         public bool Range { get; set; }
