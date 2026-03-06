@@ -204,6 +204,12 @@ namespace LanguageServer.VsCode.Contracts
         public SelectionRangeOptions SelectionRangeProvider { get; set; }
 
         /// <summary>
+        /// The server provides semantic tokens support. (LSP 3.16)
+        /// </summary>
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public SemanticTokensOptions SemanticTokensProvider { get; set; }
+
+        /// <summary>
         /// Workspace specific server capabilities.
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]

@@ -18,6 +18,12 @@ namespace LanguageServer.VsCode.Contracts
         /// </summary>
         [JsonProperty]
         public ICollection<Diagnostic> Diagnostics { get; set; }
+
+        /// <summary>
+        /// Requested action kinds. When omitted, all kinds are accepted.
+        /// </summary>
+        [JsonProperty]
+        public ICollection<string> Only { get; set; }
     }
 
     /// <summary>
